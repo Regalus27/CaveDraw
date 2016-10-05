@@ -2,8 +2,7 @@ package com.company;
 
 import javax.swing.*;
 
-import static com.company.Input.h;
-import static com.company.Input.w;
+import static com.company.Input.*;
 
 public class Main {
 
@@ -19,5 +18,27 @@ public class Main {
         frame.add(cave);
 
         frame.setVisible(true);
+
+        explore();
+    }
+    public static void explore(){
+        /*
+        get last position of generator
+        put player in that position
+
+        output a different color at that position
+        listen to keystroke
+        check walls
+        change position
+        */
+
+        //position variables
+        int X = fX;
+        int Y = fY;
+
+        //holds state of cell currently in. 1 empty, 0 full.
+        int state = 1;
+
+        //add keylistener, then movement
     }
 }

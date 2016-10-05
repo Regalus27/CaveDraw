@@ -5,16 +5,16 @@ import java.util.Random;
 /**
  * Gets info for CaveDraw, sends it in way that it can be read
  */
-public class Input {
-    static int h = 90, w = 90;
+ class Input {
+    static int h = 90, w = 90, fX = 0, fY = 0;
     static int[][] Test = new int[h][w];
 
     //here if put something in
-    public static void makeCave(String [] args){
+     static void makeCave(String [] args){
         makeCave();
     }
 
-    public static void makeCave() {
+     static void makeCave() {
         Random rand = new Random();
 
 
@@ -44,6 +44,8 @@ public class Input {
                 tries--;
             }
         }
+        fX = curX;
+        fY = curY;
         for(int y = 0; y < h; y++){
             for (int x = 0; x < w; x++){
                 System.out.print(Test[y][x]);
