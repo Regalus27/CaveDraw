@@ -3,7 +3,7 @@ package com.company;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.company.Input.Test;
+import static com.company.Input.Cave;
 import static com.company.Input.h;
 import static com.company.Input.w;
 
@@ -31,7 +31,7 @@ public class Tile extends JComponent {
         else{
             yIndex = 0;
         }
-        int boolHold = Test[yIndex][xIndex]; //multiplied by 20 for something else, so undoing it for reading file
+        int boolHold = Cave[yIndex][xIndex]; //multiplied by 20 for something else, so undoing it for reading file
         if(boolHold == 0){
             full = true;
         }

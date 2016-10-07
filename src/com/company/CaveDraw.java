@@ -2,7 +2,7 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
-import static com.company.Input.Test;
+
 import static com.company.Input.h;
 import static com.company.Input.w;
 /**
