@@ -12,7 +12,7 @@ import java.util.Random;
  * Alternatively, get lowest point in cave, fill to one elevation level higher around that point.
  */
  class Input {
-    static int h = 90, w = 90, fX = 0, fY = 0;
+    static int h = 70, w = 70, fX = 0, fY = 0;
     static int[][] Cave = new int[h][w];
     static int[][] Elevations = new int[h][w];
 
@@ -118,9 +118,13 @@ import java.util.Random;
             else{
                 south = 999;
             }
-
             if((self == 999 && west == 999 && east == 999 && north == 999) || (self == -999 && west == -999 && east == -999 && north == -999)){
-                Elevations[curY][curX] = rand.nextInt(10) + 10;
+                if(rand.nextInt() > .5){
+                    Elevations[curY][curX] = 1;
+                }
+                else{
+                    Elevations[curY][curX] = 5;
+                }
             }
             else{
                 /*
@@ -133,6 +137,7 @@ import java.util.Random;
                     L 2 3 5 H
                     2 3 3 4 5
                 */
+
             }
         }
     }
