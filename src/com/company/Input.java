@@ -33,19 +33,19 @@ import java.util.Random;
         int tries = h*w*2;
         while(tries>0) {
             int dir = rand.nextInt(4) + 1;
-            if (dir == 1 && curY >= 1) {
+            if (dir == 1 && curY > 1) {
                 curY--;
                 Cave[curY][curX] = 1;
                 tries--;
-            } else if (dir == 2 && curX <= maxX) {
+            } else if (dir == 2 && curX < maxX) {
                 curX++;
                 Cave[curY][curX] = 1;
                 tries--;
-            } else if (dir == 3 && curY <= maxY) {
+            } else if (dir == 3 && curY < maxY) {
                 curY++;
                 Cave[curY][curX] = 1;
                 tries--;
-            } else if (dir == 4 && curX >= 1) {
+            } else if (dir == 4 && curX > 1) {
                 curX--;
                 Cave[curY][curX] = 1;
                 tries--;
@@ -53,7 +53,7 @@ import java.util.Random;
         }
         fX = curX;
         fY = curY;
-         makeElevation();
+         //makeElevation();
         for(int y = 0; y < h; y++){
             for (int x = 0; x < w; x++){
                 System.out.print(Cave[y][x]);
