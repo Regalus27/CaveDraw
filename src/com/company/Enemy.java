@@ -2,7 +2,7 @@ package com.company;
 
 import java.awt.*;
 /**
- * Generic enemy class, adds hp, attack damage, enemy color
+ * Generic this class, adds hp, attack damage, this color
  */
 public class Enemy {
     private int hp;
@@ -73,9 +73,9 @@ public class Enemy {
         Input.Cave[My][Mx] = this.id;
     }
 
-    public boolean canSeePlayer(Enemy enemy, Player player){
-        int Ey = enemy.getMy();
-        int Ex = enemy.getMx();
+    public boolean canSeePlayer(Player player){
+        int Ey = this.getMy();
+        int Ex = this.getMx();
         int Px = player.getX();
         int Py = player.getY();
 
@@ -114,7 +114,7 @@ public class Enemy {
         }
 
         else {
-            double slope = getSlope(enemy, player);
+            double slope = getSlope(player);
             //now increment x, round to int y with slope to wrap to tiles
             while (Ex < Px){
                 Ex++;
@@ -134,41 +134,41 @@ public class Enemy {
         }
     }
 
-    public void move(Enemy enemy, Player player){
-        if (canSeePlayer(enemy, player)){
-            if(this.getMx()-Player.x < 0){
+    public void move(Player player){
+        if (canSeePlayer(player)){
+            if(this.getXDif(player) < 0){
                 //player is to the east
-                if (Input.Cave[(int)(this.getMy()+getSlope(enemy, player))][this.getMx()+1] ==1){ //if (cave[y+slope][x+1] is empty)
-                    this.setLocation(this.getMx()+1, ((int)(this.getMy()+getSlope(enemy, player)))); //move enemy
+                if (Input.Cave[(int)(this.getMy()+getSlope(player))][this.getMx()+1] ==1){ //if (cave[y+slope][x+1] is empty)
+                    this.setLocation(this.getMx()+1, ((int)(this.getMy()+getSlope(player)))); //move this
                 }
             }
-            else if (this.getXDif(enemy, player) > 0){ //will need to set >1, then if 1 attack player, but not yet
+            else if (this.getXDif(player) > 0){ //will need to set >1, then if 1 attack player, but not yet
                 //player is to the west
-                if (Input.Cave[(int)(this.getMy()+getSlope(enemy, player))][this.getMx()-1] ==1){ //if (cave[y+slope][x-1] is empty)
-                    this.setLocation(this.getMx()-1, ((int)(this.getMy()+getSlope(enemy, player)))); //move enemy
+                if (Input.Cave[(int)(this.getMy()+getSlope(player))][this.getMx()-1] ==1){ //if (cave[y+slope][x-1] is empty)
+                    this.setLocation(this.getMx()-1, ((int)(this.getMy()+getSlope(player)))); //move this
                 }
             }
         }
         else{
             // if at same x
-            if (this.getYDif(this, player) > 0){
+            if (this.getYDif(player) > 0){
                 
             }
         }
     }
 
-    private double getSlope(Enemy enemy, Player player){
-        if (getXDif(enemy, player) != 0)
-            return  (getYDif(enemy, player))/(getXDif(enemy,player));
+    private double getSlope(Player player){
+        if (getXDif(player) != 0)
+            return  (getYDif(player))/(getXDif(player));
         else
             return 0;
     }
 
-    private int getYDif(Enemy enemy, Player player){
-        return player.getY()-enemy.getMy();
+    private int getYDif(Player player){
+        return player.getY()-this.getMy();
     }
-    private int getXDif(Enemy enemy, Player player){
-        return player.getX()-enemy.getMx();
+    private int getXDif(Player player){
+        return player.getX()-this.getMx();
     }
     public void die(){
         Input.Cave[this.getMy()][this.getMx()] = 1;
