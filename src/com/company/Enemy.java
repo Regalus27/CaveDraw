@@ -9,18 +9,16 @@ import static com.company.Player.x;
  */
 public class Enemy {
     public enum Enemies{
-        KOBOLD (3),
-        GOBLIN (4),
-        SKELETON (5),
-        GOBLIN_SHAMAN (6),
-        OGRE (7);
+        KOBOLD,
+        GOBLIN,
+        SKELETON,
+        GOBLIN_SHAMAN,
+        OGRE;
 
-        Enemies(int i) {
-
-        }
     }
     private int hp;
     private int atkDmg;
+    private int id;
 
     public int getMx() {
         return this.Mx;
@@ -38,34 +36,39 @@ public class Enemy {
             this.hp = 2;
             this.atkDmg = 1;
             this.color = Color.orange;
+            this.id = 3;
         }
         if (type == Enemies.GOBLIN){
             this.hp = 3;
             this.atkDmg = 2;
             this.color = Color.green;
+            this.id = 4;
         }
         if (type == Enemies.SKELETON){
             this.hp = 4;
             this.atkDmg = 2;
             this.color = Color.yellow;
+            this.id = 5;
         }
         if (type == Enemies.GOBLIN_SHAMAN){
             this.hp = 4;
             this.atkDmg = 1;
             //add spells... maybe just ranged attacks?
             this.color = Color.magenta;
+            this.id = 6;
         }
         if (type == Enemies.OGRE){
             hp = 7;
             atkDmg = 4;
             color = Color.red;
+            this.id = 7;
         }
     }
     public void setLocation(int x, int y){
         Input.Cave[My][Mx] = 1;
         this.Mx = x;
         this.My = y;
-        //Input.Cave[My][Mx] = this.
+        Input.Cave[My][Mx] = this.id;
     }
 
     public boolean canSeePlayer(int Ex, int Ey, int Px, int Py){
