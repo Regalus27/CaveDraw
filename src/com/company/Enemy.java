@@ -62,7 +62,7 @@ public class Enemy {
 
 
     public Color getColor() {
-        return color;
+        return this.color;
     }
 
     public void setColor(Color color) {
@@ -77,7 +77,7 @@ public class Enemy {
         Input.Cave[My][Mx] = 1;
         this.Mx = x;
         this.My = y;
-        Input.Cave[My][Mx] = this.id;
+        Input.Cave[this.My][this.Mx] = this.getId();
     }
 
     public boolean canSeePlayer(Player player){
@@ -155,13 +155,24 @@ public class Enemy {
                     this.setLocation(this.getMx()-1, ((int)(this.getMy()+getSlope(player)))); //move this
                 }
             }
-        }
-        else{
-            // if at same x
-            if (this.getYDif(player) > 0){
-                
+            else{
+                // if at same x
+                if (this.getYDif(player) > 0){
+                    //player is south
+                    if (Input.Cave[this.getMy()+1][this.getMx()]==1){
+                        this.setLocation(this.getMx(),(this.getMy()+1)); //move this
+                    }
+                }
+                else if (this.getYDif(player) < 0){
+                    //player is north
+                    if (Input.Cave[this.getMy()-1][this.getMx()]==1){
+                        this.setLocation(this.getMx(),(this.getMy()-1)); //move this
+                    }
+                }
+                //Add something to handle if they are at same x and y, which would be an error...
             }
         }
+
     }
 
     private double getSlope(Player player){
@@ -179,6 +190,7 @@ public class Enemy {
     }
     public void die(){
         Input.Cave[this.getMy()][this.getMx()] = 1;
+        CaveFrame.frame.addEnemy();
     }
     public void damagePlayer(Player player){
         player.setHealth(player.getHealth()-this.getAtkDmg());

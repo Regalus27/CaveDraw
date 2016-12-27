@@ -16,6 +16,7 @@ public class Ogre extends Enemy {
         this.setHp(7);
         this.setAtkDmg(3);
         this.setColor(Color.red);
+        this.setId(6);
         this.setLocation(x, y);
     }
 }

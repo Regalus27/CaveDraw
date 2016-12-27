@@ -17,6 +17,7 @@ public class CaveFrame extends JFrame implements KeyListener{
     Player player;
     public static void main(String [] args){
         frame.setVisible(true);
+        frame.addEnemy();
     }
     CaveFrame(){
         setSize(w*10, h*10);
@@ -47,35 +48,35 @@ public class CaveFrame extends JFrame implements KeyListener{
     public void move(KeyEvent e){
 
         int kCode = e.getKeyCode();
-        if((kCode == 38||kCode==87||kCode==104) && Cave[y-1][x]==1){//north
+        if((kCode == 38||kCode==87||kCode==104) && Cave[y-1][x]!=0){//north
             dx=0;
             dy=-1;
         }
-        else if ((kCode==40||kCode==83||kCode==98) && Cave[y+1][x]==1){//south
+        else if ((kCode==40||kCode==83||kCode==98) && Cave[y+1][x]!=0){//south
             dx=0;
             dy=1;
         }
-        else if((kCode==37||kCode==65||kCode==100) && Cave[y][x-1]==1){//west
+        else if((kCode==37||kCode==65||kCode==100) && Cave[y][x-1]!=0){//west
             dx=-1;
             dy=0;
         }
-        else if((kCode==39||kCode==68||kCode==102) && Cave[y][x+1]==1){//east
+        else if((kCode==39||kCode==68||kCode==102) && Cave[y][x+1]!=0){//east
             dx=1;
             dy=0;
         }
-        else if (kCode==103 && Cave[y-1][x-1]==1 && Cave[y][x-1]==1 && Cave[y-1][x]==1){//northwest
+        else if (kCode==103 && Cave[y-1][x-1]!=0 && Cave[y][x-1]!=0 && Cave[y-1][x]!=0){//northwest
             dx=-1;
             dy=-1;
         }
-        else if (kCode==105 && Cave[y-1][x+1]==1 && Cave[y][x+1]==1 && Cave[y-1][x]==1){//northeast
+        else if (kCode==105 && Cave[y-1][x+1]!=0 && Cave[y][x+1]!=0 && Cave[y-1][x]!=0){//northeast
             dx=1;
             dy=-1;
         }
-        else if (kCode==97 && Cave[y+1][x-1]==1 && Cave[y][x-1]==1 && Cave[y+1][x]==1){//southwest
+        else if (kCode==97 && Cave[y+1][x-1]!=0 && Cave[y][x-1]!=0 && Cave[y+1][x]!=0){//southwest
             dx=-1;
             dy=1;
         }
-        else if (kCode==99 && Cave[y+1][x+1]==1 && Cave[y][x+1]==1 && Cave[y+1][x]==1){//southeast
+        else if (kCode==99 && Cave[y+1][x+1]!=0 && Cave[y][x+1]!=0 && Cave[y+1][x]!=0){//southeast
             dx=1;
             dy=1;
         }
@@ -86,13 +87,20 @@ public class CaveFrame extends JFrame implements KeyListener{
 
         x+=dx;
         y+=dy;
-        player.move(dx,dy);
+        if (Cave[y][x]<3) {
+            player.move(dx, dy);
+        }
+        else {
+            //damage enemy at x,y
+            x-=dx;
+            y-=dy;
+        }
     }
 
     public void addEnemy(){
         Enemy.Races[] races = Enemy.Races.values();
         Random random = new Random();
-        int i = random.nextInt(races.length)+1;
+        int i = random.nextInt(races.length);
         Enemy.Races race = races[i];
         int x; int y;
         int maxX = Input.w, maxY = Input.h;

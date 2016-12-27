@@ -39,7 +39,7 @@ public class Tile extends JComponent {
             full = 0;
         }
         else{
-            full = 2;
+            full = boolHold;
         }
     }
 
@@ -50,8 +50,20 @@ public class Tile extends JComponent {
         else if(full==0){
             g2.setColor(Color.lightGray);
         }
-        else{
+        else if(full == 2){
             g2.setColor(Color.blue);
+        }
+        else if (full == 3){
+            g2.setColor(Color.orange);
+        }
+        else if (full == 4){
+            g2.setColor(Color.green);
+        }
+        else if (full == 5){
+            g2.setColor(Color.darkGray);
+        }
+        else if (full == 6){
+            g2.setColor(Color.red);
         }
         //Tiles
         int[] xTiles = new int[w+1];
