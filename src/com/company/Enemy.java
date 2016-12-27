@@ -1,24 +1,46 @@
 package com.company;
 
 import java.awt.*;
-
-import static com.company.Player.x;
-
 /**
  * Generic enemy class, adds hp, attack damage, enemy color
  */
 public class Enemy {
-    public enum Enemies{
-        KOBOLD,
-        GOBLIN,
-        SKELETON,
-        GOBLIN_SHAMAN,
-        OGRE;
-
-    }
     private int hp;
     private int atkDmg;
     private int id;
+    private int Mx;
+    private int My;
+    private Color color;
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+
+
+    public int getAtkDmg() {
+        return atkDmg;
+    }
+
+    public void setAtkDmg(int atkDmg) {
+        this.atkDmg = atkDmg;
+    }
+
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
 
     public int getMx() {
         return this.Mx;
@@ -28,41 +50,21 @@ public class Enemy {
         return this.My;
     }
 
-    private int Mx;
-    private int My;
-    private Color color;
-    public Enemy(Enemies type){
-        if (type == Enemies.KOBOLD){
-            this.hp = 2;
-            this.atkDmg = 1;
-            this.color = Color.orange;
-            this.id = 3;
-        }
-        if (type == Enemies.GOBLIN){
-            this.hp = 3;
-            this.atkDmg = 2;
-            this.color = Color.green;
-            this.id = 4;
-        }
-        if (type == Enemies.SKELETON){
-            this.hp = 4;
-            this.atkDmg = 2;
-            this.color = Color.yellow;
-            this.id = 5;
-        }
-        if (type == Enemies.GOBLIN_SHAMAN){
-            this.hp = 4;
-            this.atkDmg = 1;
-            //add spells... maybe just ranged attacks?
-            this.color = Color.magenta;
-            this.id = 6;
-        }
-        if (type == Enemies.OGRE){
-            hp = 7;
-            atkDmg = 4;
-            color = Color.red;
-            this.id = 7;
-        }
+
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+
+    public Enemy(){
+        this.hp = 0;
+        this.atkDmg = 0;
+        this.id = 3; //default to dead Kobold, so nothing breaks.
     }
     public void setLocation(int x, int y){
         Input.Cave[My][Mx] = 1;
@@ -71,9 +73,9 @@ public class Enemy {
         Input.Cave[My][Mx] = this.id;
     }
 
-    public boolean canSeePlayer(int Ex, int Ey, int Px, int Py){
-        double slope = (Py-Ey)/(Px-Ex);
-        //now increment x, round to int y with slope to wrap to tiles
+    public boolean canSeePlayer(Enemy enemy, int Px, int Py){
+        int Ey = enemy.getMy();
+        int Ex = enemy.getMx();
 
         if (Ex == Px){
                 while (Ey > Py){
@@ -110,6 +112,8 @@ public class Enemy {
         }
 
         else {
+            double slope = getSlope(enemy, Px, Py);
+            //now increment x, round to int y with slope to wrap to tiles
             while (Ex < Px){
                 Ex++;
                 Ey = (int)(Ey+slope);
@@ -126,6 +130,21 @@ public class Enemy {
             }
             return true;
         }
+    }
+
+    public void move(Enemy enemy){
+        if (canSeePlayer(enemy, Player.x, Player.y)){
+            
+        }
+    }
+
+    private double getSlope(Enemy enemy, int x, int y){ //x and y of thing to get slope to
+                                                        //won't return an error for /0, but isn't accurate
+                                                        //so be smart when using this.
+        if (x-enemy.getMx() != 0)
+            return  (y-enemy.getMy())/(x-enemy.getMx());
+        else
+            return 0;
     }
 
 }
