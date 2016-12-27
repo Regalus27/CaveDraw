@@ -12,9 +12,10 @@ import java.awt.*;
  * Will try to make them dumber at some point
  */
 public class Ogre extends Enemy {
-    public Ogre(){
+    public Ogre(int x, int y){
         this.setHp(7);
         this.setAtkDmg(3);
         this.setColor(Color.red);
+        this.setLocation(x, y);
     }
 }

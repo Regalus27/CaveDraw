@@ -73,9 +73,11 @@ public class Enemy {
         Input.Cave[My][Mx] = this.id;
     }
 
-    public boolean canSeePlayer(Enemy enemy, int Px, int Py){
+    public boolean canSeePlayer(Enemy enemy, Player player){
         int Ey = enemy.getMy();
         int Ex = enemy.getMx();
+        int Px = player.getX();
+        int Py = player.getY();
 
         if (Ex == Px){
                 while (Ey > Py){
@@ -112,7 +114,7 @@ public class Enemy {
         }
 
         else {
-            double slope = getSlope(enemy, Px, Py);
+            double slope = getSlope(enemy, player);
             //now increment x, round to int y with slope to wrap to tiles
             while (Ex < Px){
                 Ex++;
@@ -132,19 +134,46 @@ public class Enemy {
         }
     }
 
-    public void move(Enemy enemy){
-        if (canSeePlayer(enemy, Player.x, Player.y)){
-            
+    public void move(Enemy enemy, Player player){
+        if (canSeePlayer(enemy, player)){
+            if(this.getMx()-Player.x < 0){
+                //player is to the east
+                if (Input.Cave[(int)(this.getMy()+getSlope(enemy, player))][this.getMx()+1] ==1){ //if (cave[y+slope][x+1] is empty)
+                    this.setLocation(this.getMx()+1, ((int)(this.getMy()+getSlope(enemy, player)))); //move enemy
+                }
+            }
+            else if (this.getXDif(enemy, player) > 0){ //will need to set >1, then if 1 attack player, but not yet
+                //player is to the west
+                if (Input.Cave[(int)(this.getMy()+getSlope(enemy, player))][this.getMx()-1] ==1){ //if (cave[y+slope][x-1] is empty)
+                    this.setLocation(this.getMx()-1, ((int)(this.getMy()+getSlope(enemy, player)))); //move enemy
+                }
+            }
+        }
+        else{
+            // if at same x
+            if (this.getYDif(this, player) > 0){
+                
+            }
         }
     }
 
-    private double getSlope(Enemy enemy, int x, int y){ //x and y of thing to get slope to
-                                                        //won't return an error for /0, but isn't accurate
-                                                        //so be smart when using this.
-        if (x-enemy.getMx() != 0)
-            return  (y-enemy.getMy())/(x-enemy.getMx());
+    private double getSlope(Enemy enemy, Player player){
+        if (getXDif(enemy, player) != 0)
+            return  (getYDif(enemy, player))/(getXDif(enemy,player));
         else
             return 0;
     }
 
+    private int getYDif(Enemy enemy, Player player){
+        return player.getY()-enemy.getMy();
+    }
+    private int getXDif(Enemy enemy, Player player){
+        return player.getX()-enemy.getMx();
+    }
+    public void die(){
+        Input.Cave[this.getMy()][this.getMx()] = 1;
+    }
+    public void damagePlayer(Player player){
+        player.setHealth(player.getHealth()-this.getAtkDmg());
+    }
 }

@@ -6,6 +6,14 @@ import javax.swing.*;
  * Player class, regulates health, attack power, location, spells?, items?
  */
 public class Player {
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        Player.health = health;
+    }
+
     public static int health, strength, x, y;
     public Player(){
         health = 10;
@@ -13,22 +21,15 @@ public class Player {
         x=CaveFrame.x;
         y=CaveFrame.y;
     }
-    public void damagePlayer(int dmg){
-        health-=dmg;
-        if (health<=0)
-            killPlayer();
-    }
-    public void healPlayer(int heal){
-        health+=heal;
-        if (health<=0)
-            killPlayer();
+    public void damageEnemy(Enemy enemy){
+        enemy.setHp(enemy.getHp()-getStrength());
+        if (enemy.getHp()<=0) {
+            enemy.die();
+        }
     }
     public void move(int dx, int dy){
         x+=dx;
         y+=dy;
-        if (health <= 0){
-            killPlayer();
-        }
     }
     public int getX(){
         return x;
@@ -39,7 +40,7 @@ public class Player {
     public int getStrength(){
         return strength;
     }
-    private void killPlayer(){
+    private void die(){
         System.out.println("You died...");
         JOptionPane.showMessageDialog(CaveFrame.frame, "You died...");
         CaveFrame.frame.dispose();

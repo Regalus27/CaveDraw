@@ -45,9 +45,6 @@ import java.util.Random;
                 Cave[curY][curX] = 1;
                 tries--;
             }
-            if (tries == h*w){
-                Enemy kobold = new Enemy(Enemy.Enemies.KOBOLD);
-            }
         }
         fX = curX;
         fY = curY;

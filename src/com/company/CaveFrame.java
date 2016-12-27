@@ -8,6 +8,7 @@ import static com.company.Input.*;
 
 /**
  * JFrame frame for cave
+ * Also is main class... :)
  */
 public class CaveFrame extends JFrame implements KeyListener{
     public static int x, y, dx, dy;
@@ -87,14 +88,8 @@ public class CaveFrame extends JFrame implements KeyListener{
         player.move(dx,dy);
     }
 
-    public void addEnemy(int enemyID){
+    public void addEnemy(){
 
     }
 
 }
-/*
-* UP: 38, 87 dy-1
-* DOWN: 40,83 dy+1
-* LEFT: 37,65 dx-1
-* RIGHT: 68, 39 dx+1
-* */
