@@ -5,6 +5,15 @@ import java.awt.*;
  * Generic this class, adds hp, attack damage, this color
  */
 public class Enemy {
+    public enum Races{
+        KOBOLD,
+        GOBLIN,
+        SHADE,
+        OGRE
+    }
+    public Races[] getRaces(){
+        return Races.values();
+    }
     private int hp;
     private int atkDmg;
     private int id;
@@ -62,9 +71,7 @@ public class Enemy {
 
 
     public Enemy(){
-        this.hp = 0;
-        this.atkDmg = 0;
-        this.id = 3; //default to dead Kobold, so nothing breaks.
+
     }
     public void setLocation(int x, int y){
         Input.Cave[My][Mx] = 1;

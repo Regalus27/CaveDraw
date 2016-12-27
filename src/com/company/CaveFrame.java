@@ -3,6 +3,7 @@ package com.company;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 
 import static com.company.Input.*;
 
@@ -89,7 +90,30 @@ public class CaveFrame extends JFrame implements KeyListener{
     }
 
     public void addEnemy(){
-
+        Enemy.Races[] races = Enemy.Races.values();
+        Random random = new Random();
+        int i = random.nextInt(races.length)+1;
+        Enemy.Races race = races[i];
+        int x; int y;
+        int maxX = Input.w, maxY = Input.h;
+        while (true){
+            y=random.nextInt(maxY);
+            x=random.nextInt(maxX);
+            if (Input.Cave[y][x] == 1){
+                break;
+            }
+        }
+        if (race == Enemy.Races.OGRE){
+            Ogre ogre = new Ogre(x,y);
+        }
+        else if (race == Enemy.Races.GOBLIN){
+            Goblin goblin = new Goblin(x,y);
+        }
+        else if (race == Enemy.Races.KOBOLD){
+            Kobold kobold = new Kobold(x,y);
+        }
+        else if (race == Enemy.Races.SHADE){
+            Shade shade = new Shade(x, y);
+        }
     }
-
 }
