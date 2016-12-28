@@ -19,6 +19,8 @@ public class CaveFrame extends JFrame implements KeyListener{
     public static void main(String [] args){
         frame.setVisible(true);
         enemyArrayList.add(frame.addEnemy());
+        enemyArrayList.add(frame.addEnemy());
+        enemyArrayList.add(frame.addEnemy());
     }
     CaveFrame(){
         setSize(w*10, h*10);
@@ -95,6 +97,10 @@ public class CaveFrame extends JFrame implements KeyListener{
             //damage enemy at x,y
             //need to add a list of enemies and positions in CaveFrame for organization, attacking and damaging and move
             player.damageEnemy(x+dx,y+dy);
+        }
+        for (int i = 0; i < enemyArrayList.size(); i++){
+            Enemy enemy = enemyArrayList.get(i);
+            enemy.move(player);
         }
     }
 

@@ -86,8 +86,8 @@ public class Enemy {
         int Px = player.getX();
         int Py = player.getY();
 
-        if (Ex == Px){
-                while (Ey > Py){
+        if (Ex == Px){ // if x the same
+                while (this.getYDif(player) < 0){//Ey > Py
                     Ey--;
                     if (Input.Cave[Ey][Ex] == 0){
                         return false;
@@ -143,16 +143,23 @@ public class Enemy {
 
     public void move(Player player){
         if (canSeePlayer(player)){
+            double slope = this.getSlope(player);
+            if (slope>1){
+                slope = 1;
+            }
+            else if (slope<-1){
+                slope = -1;
+            }
             if(this.getXDif(player) < 0){
                 //player is to the east
-                if (Input.Cave[(int)(this.getMy()+getSlope(player))][this.getMx()+1] ==1){ //if (cave[y+slope][x+1] is empty)
-                    this.setLocation(this.getMx()+1, ((int)(this.getMy()+getSlope(player)))); //move this
+                if (Input.Cave[(int)(this.getMy()+slope)][this.getMx()-1] ==1){ //if (cave[y+slope][x+1] is empty)
+                    this.setLocation(this.getMx()-1, ((int)(this.getMy()+slope))); //move this
                 }
             }
             else if (this.getXDif(player) > 0){ //will need to set >1, then if 1 attack player, but not yet
                 //player is to the west
-                if (Input.Cave[(int)(this.getMy()+getSlope(player))][this.getMx()-1] ==1){ //if (cave[y+slope][x-1] is empty)
-                    this.setLocation(this.getMx()-1, ((int)(this.getMy()+getSlope(player)))); //move this
+                if (Input.Cave[(int)(this.getMy()+slope)][this.getMx()+1] ==1){ //if (cave[y+slope][x-1] is empty)
+                    this.setLocation(this.getMx()+1, ((int)(this.getMy()+slope))); //move this
                 }
             }
             else{
