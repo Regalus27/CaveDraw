@@ -94,7 +94,7 @@ public class CaveFrame extends JFrame implements KeyListener{
         else {
             //damage enemy at x,y
             //need to add a list of enemies and positions in CaveFrame for organization, attacking and damaging and move
-
+            player.damageEnemy(x+dx,y+dy);
         }
     }
 

@@ -27,11 +27,16 @@ public class Player {
         enemy.setHp(enemy.getHp()-getStrength());
         if (enemy.getHp()<=0) {
             enemy.die();
+            ++killCount;
         }
     }
     public void damageEnemy(int x, int y){
         for (int i = 0; i < CaveFrame.enemyArrayList.size(); i++){
-
+            Enemy enemy = CaveFrame.enemyArrayList.get(i);
+            if (enemy.getMx() == x && enemy.getMy() == y){
+                damageEnemy(enemy);
+                break;
+            }
         }
     }
     public void move(int dx, int dy){
