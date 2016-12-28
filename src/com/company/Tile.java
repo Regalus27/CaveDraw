@@ -74,5 +74,8 @@ public class Tile extends JComponent {
         }
         Rectangle tile = new Rectangle(xTiles[xIndex], yTiles[yIndex], 10, 10);
         g2.fill(tile);
+        Rectangle topLeft = new Rectangle(0,0,10,10);
+        g2.setColor(Color.black);
+        g2.fill(topLeft);
     }
 }

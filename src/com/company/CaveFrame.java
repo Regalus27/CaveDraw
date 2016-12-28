@@ -3,7 +3,7 @@ package com.company;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Random;
+import java.util.*;
 
 import static com.company.Input.*;
 
@@ -12,12 +12,13 @@ import static com.company.Input.*;
  * Also is main class... :)
  */
 public class CaveFrame extends JFrame implements KeyListener{
-    public static int x, y, dx, dy;
+    static List<Enemy> enemyArrayList = new ArrayList<>(); //stores list of active enemies
+    static int x, y, dx, dy;
     static CaveFrame frame = new CaveFrame();
     Player player;
     public static void main(String [] args){
         frame.setVisible(true);
-        frame.addEnemy();
+        enemyArrayList.add(frame.addEnemy());
     }
     CaveFrame(){
         setSize(w*10, h*10);
@@ -85,19 +86,19 @@ public class CaveFrame extends JFrame implements KeyListener{
             dy = 0;
         }
 
-        x+=dx;
-        y+=dy;
-        if (Cave[y][x]<3) {
+        if (Cave[y+dy][x+dx]<3) {
+            x+=dx;
+            y+=dy;
             player.move(dx, dy);
         }
         else {
             //damage enemy at x,y
-            x-=dx;
-            y-=dy;
+            //need to add a list of enemies and positions in CaveFrame for organization, attacking and damaging and move
+
         }
     }
 
-    public void addEnemy(){
+    public Enemy addEnemy(){
         Enemy.Races[] races = Enemy.Races.values();
         Random random = new Random();
         int i = random.nextInt(races.length);
@@ -112,16 +113,16 @@ public class CaveFrame extends JFrame implements KeyListener{
             }
         }
         if (race == Enemy.Races.OGRE){
-            Ogre ogre = new Ogre(x,y);
+            return new Ogre(x,y);
         }
         else if (race == Enemy.Races.GOBLIN){
-            Goblin goblin = new Goblin(x,y);
+            return new Goblin(x,y);
         }
         else if (race == Enemy.Races.KOBOLD){
-            Kobold kobold = new Kobold(x,y);
+            return new Kobold(x,y);
         }
-        else if (race == Enemy.Races.SHADE){
-            Shade shade = new Shade(x, y);
+        else{ //default shade - because if it's an error, its pretty shady...
+            return new Shade(x, y);
         }
     }
 }

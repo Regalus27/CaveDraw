@@ -190,7 +190,7 @@ public class Enemy {
     }
     public void die(){
         Input.Cave[this.getMy()][this.getMx()] = 1;
-        CaveFrame.frame.addEnemy();
+        CaveFrame.enemyArrayList.remove(this);
     }
     public void damagePlayer(Player player){
         player.setHealth(player.getHealth()-this.getAtkDmg());

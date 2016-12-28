@@ -51,15 +51,17 @@ import java.util.Random;
         for (int i = 0; i < 3; i++){
             Automata.cycle();
         }
-        for(int y = 0; y < h; y++){
+        /*for(int y = 0; y < h; y++){
             for (int x = 0; x < w; x++){
                 System.out.print(Cave[y][x]);
             }
             System.out.println();
-        }
+        }*/ //was here for seeing if cave generated properly
     }
     static void updateCave(int x, int y, int dx, int dy){
-        Cave[y-dy][x-dx]=1;
+        if (Cave[y-dy][x-dx]==2) {
+            Cave[y - dy][x - dx] = 1;
+        }
         Cave[y][x]=2;
     }
 }
