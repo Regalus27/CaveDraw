@@ -1,5 +1,6 @@
 package com.company;
 
+import javax.swing.*;
 import java.awt.*;
 /**
  * Generic this class, adds hp, attack damage, this color
@@ -144,19 +145,13 @@ public class Enemy {
     public void move(Player player){
         if (canSeePlayer(player)){
             double slope = this.getSlope(player);
-            if (slope>1){
-                slope = 1;
-            }
-            else if (slope<-1){
-                slope = -1;
-            }
             if(this.getXDif(player) < 0){
                 //player is to the east
                 if (Input.Cave[(int)(this.getMy()+slope)][this.getMx()-1] ==1){ //if (cave[y+slope][x+1] is empty)
                     this.setLocation(this.getMx()-1, ((int)(this.getMy()+slope))); //move this
                 }
             }
-            else if (this.getXDif(player) > 0){ //will need to set >1, then if 1 attack player, but not yet
+            else if (this.getXDif(player) > 0){ //will need to set dist>1, then if 1 attack player, but not yet
                 //player is to the west
                 if (Input.Cave[(int)(this.getMy()+slope)][this.getMx()+1] ==1){ //if (cave[y+slope][x-1] is empty)
                     this.setLocation(this.getMx()+1, ((int)(this.getMy()+slope))); //move this
@@ -176,7 +171,6 @@ public class Enemy {
                         this.setLocation(this.getMx(),(this.getMy()-1)); //move this
                     }
                 }
-                //Add something to handle if they are at same x and y, which would be an error...
             }
         }
 
@@ -184,19 +178,31 @@ public class Enemy {
 
     private double getSlope(Player player){
         if (getXDif(player) != 0) {
-            double slope = (getYDif(player)) / (getXDif(player));
-            if (slope > 1){
-                return 1;
-            }
-            else if (slope < -1){
-                return -1;
-            }
-            else {
-                return slope;
-            }
+            return (getYDif(player)) / (getXDif(player));
         }
         else {
             return 0;
+        }
+    }
+
+    private int moveX(Player player){
+        //how far on the x-axis should monster move
+        //added so that enemies didn't move away when moving west
+        if (Math.abs(this.getSlope(player)) > 1){
+            return 0;
+        }
+        else {
+            if (this.getSlope(player) > 0){
+                return 1;
+            }
+            else if (this.getSlope(player) < 0){
+                return -1;
+            }
+            else {
+                if (this.getXDif(player) > 0){
+                    return 
+                }
+            }
         }
     }
 
@@ -209,6 +215,11 @@ public class Enemy {
     public void die(){
         Input.Cave[this.getMy()][this.getMx()] = 1;
         CaveFrame.enemyArrayList.remove(this);
+        if (CaveFrame.enemyArrayList.size() < 1){
+            System.out.println("You win!");
+            JOptionPane.showMessageDialog(CaveFrame.frame, "You win!");
+            CaveFrame.frame.dispose();
+        }
     }
     public void damagePlayer(Player player){
         player.setHealth(player.getHealth()-this.getAtkDmg());

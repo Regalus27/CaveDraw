@@ -37,7 +37,6 @@ public class CaveFrame extends JFrame implements KeyListener{
     }
     public void keyPressed(KeyEvent event) {
         move(event);
-        Input.updateCave(x,y,dx,dy);
         CaveDraw exploreUpdate = new CaveDraw();
         add(exploreUpdate);
         frame.repaint();
@@ -92,6 +91,7 @@ public class CaveFrame extends JFrame implements KeyListener{
             x+=dx;
             y+=dy;
             player.move(dx, dy);
+            Input.updateCave(x,y,dx,dy);
         }
         else {
             //damage enemy at x,y
