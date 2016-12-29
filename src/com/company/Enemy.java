@@ -183,10 +183,21 @@ public class Enemy {
     }
 
     private double getSlope(Player player){
-        if (getXDif(player) != 0)
-            return  (getYDif(player))/(getXDif(player));
-        else
+        if (getXDif(player) != 0) {
+            double slope = (getYDif(player)) / (getXDif(player));
+            if (slope > 1){
+                return 1;
+            }
+            else if (slope < -1){
+                return -1;
+            }
+            else {
+                return slope;
+            }
+        }
+        else {
             return 0;
+        }
     }
 
     private int getYDif(Player player){
