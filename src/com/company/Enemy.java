@@ -81,7 +81,7 @@ public class Enemy {
         Input.Cave[this.My][this.Mx] = this.getId();
     }
 
-    public boolean canSeePlayer(Player player){
+    public boolean canSeePlayer(Player player){ //make proper ray-finding, look at brogue source, see if it can go java
         int Ey = this.getMy();
         int Ex = this.getMx();
         int Px = player.getX();
@@ -122,19 +122,11 @@ public class Enemy {
         }
 
         else {
-            double slope = getSlope(player);
             //now increment x, round to int y with slope to wrap to tiles
-            while (Ex < Px){
-                Ex++;
-                Ey = (int)(Ey+slope);
-                if (Input.Cave[Ey][Ex] == 0){
-                    return false;
-                }
-            }
-            while (Ex > Px){
-                Ex--;
-                Ey = (int)(Ey+slope);
-                if (Input.Cave[Ey][Ex] == 0){
+            while (Ex != player.getX() && Ey != player.getY()) {
+                Ex += this.moveX(player);
+                Ey += this.moveY(player);
+                if (Input.Cave[Ey][Ex] == 0) {
                     return false;
                 }
             }
@@ -143,37 +135,12 @@ public class Enemy {
     }
 
     public void move(Player player){
-        if (canSeePlayer(player)){
-            double slope = this.getSlope(player);
-            if(this.getXDif(player) < 0){
-                //player is to the east
-                if (Input.Cave[(int)(this.getMy()+slope)][this.getMx()-1] ==1){ //if (cave[y+slope][x+1] is empty)
-                    this.setLocation(this.getMx()-1, ((int)(this.getMy()+slope))); //move this
-                }
-            }
-            else if (this.getXDif(player) > 0){ //will need to set dist>1, then if 1 attack player, but not yet
-                //player is to the west
-                if (Input.Cave[(int)(this.getMy()+slope)][this.getMx()+1] ==1){ //if (cave[y+slope][x-1] is empty)
-                    this.setLocation(this.getMx()+1, ((int)(this.getMy()+slope))); //move this
-                }
-            }
-            else{
-                // if at same x
-                if (this.getYDif(player) > 0){
-                    //player is south
-                    if (Input.Cave[this.getMy()+1][this.getMx()]==1){
-                        this.setLocation(this.getMx(),(this.getMy()+1)); //move this
-                    }
-                }
-                else if (this.getYDif(player) < 0){
-                    //player is north
-                    if (Input.Cave[this.getMy()-1][this.getMx()]==1){
-                        this.setLocation(this.getMx(),(this.getMy()-1)); //move this
-                    }
-                }
-            }
+        //make pathfinding for movement.
+        //oh joy why did I do this?
+        if (this.canSeePlayer(player)){
+            this.moveX(player);
+            this.moveY(player);
         }
-
     }
 
     private double getSlope(Player player){
@@ -188,7 +155,7 @@ public class Enemy {
     private int moveX(Player player){
         //how far on the x-axis should monster move
         //added so that enemies didn't move away when moving west
-        if (Math.abs(this.getSlope(player)) > 1){
+        if (Math.abs(this.getSlope(player)) > 1){ //if rise/run > 1, for example 5 up 1 to right
             return 0;
         }
         else {
@@ -200,8 +167,34 @@ public class Enemy {
             }
             else {
                 if (this.getXDif(player) > 0){
-                    return 
+                    return 1;
                 }
+                else if (this.getXDif(player) < 0){
+                    return -1;
+                }
+                else {
+                    return 0;
+                }
+            }
+        }
+    }
+
+    private int moveY(Player player){
+        if (this.getSlope(player) > 1){
+            return 1;
+        }
+        else if (this.getSlope(player) < -1){
+            return -1;
+        }
+        else {
+            if (this.getYDif(player) > 0){
+                return 1;
+            }
+            else if (this.getYDif(player) < 0){
+                return -1;
+            }
+            else {
+                return 0;
             }
         }
     }
