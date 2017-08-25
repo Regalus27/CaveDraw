@@ -21,7 +21,7 @@ public class Player {
         strength = 3;
         x=CaveFrame.x;
         y=CaveFrame.y;
-        Input.Cave[y][x] = 2;
+        Input.Cave[y][x].setState(2);
     }
     public void damageEnemy(Enemy enemy){
         enemy.setHp(enemy.getHp()-getStrength());

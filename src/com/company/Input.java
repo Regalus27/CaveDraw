@@ -14,15 +14,20 @@ import java.util.Random;
  */
  class Input {
     static int h = 70, w = 70, fX = 0, fY = 0;
-    static int[][] Cave = new int[h][w];
+    static Node[][] Cave = new Node[h][w];
 
      static void makeCave() {
         Random rand = new Random();
+        for (int i = 0; i < h; ++i){
+            for (int j = 0; j < w; ++j){
+                Cave[i][j] = new Node(i, j, 0);
+            }
+        }
 
 
         int curX = rand.nextInt(w);
         int curY = rand.nextInt(h);
-        Cave[curY][curX] = 1;
+        Cave[curY][curX].setState(1);
         int maxX = w-4;
         int maxY = h-4;
         int tries = h*w*2;
@@ -30,19 +35,19 @@ import java.util.Random;
             int dir = rand.nextInt(4) + 1;
             if (dir == 1 && curY > 1) {
                 curY--;
-                Cave[curY][curX] = 1;
+                Cave[curY][curX].setState(1);
                 tries--;
             } else if (dir == 2 && curX < maxX) {
                 curX++;
-                Cave[curY][curX] = 1;
+                Cave[curY][curX].setState(1);
                 tries--;
             } else if (dir == 3 && curY < maxY) {
                 curY++;
-                Cave[curY][curX] = 1;
+                Cave[curY][curX].setState(1);
                 tries--;
             } else if (dir == 4 && curX > 1) {
                 curX--;
-                Cave[curY][curX] = 1;
+                Cave[curY][curX].setState(1);
                 tries--;
             }
         }
@@ -59,9 +64,9 @@ import java.util.Random;
         }*/ //was here for seeing if cave generated properly
     }
     static void updateCave(int x, int y, int dx, int dy){
-        if (Cave[y-dy][x-dx]==2) {
-            Cave[y - dy][x - dx] = 1;
+        if (Cave[y-dy][x-dx].getState()==2) {
+            Cave[y - dy][x - dx].setState(1);
         }
-        Cave[y][x]=2;
+        Cave[y][x].setState(2);
     }
 }

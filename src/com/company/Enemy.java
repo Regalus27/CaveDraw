@@ -75,10 +75,10 @@ public class Enemy {
 
     }
     public void setLocation(int x, int y){
-        Input.Cave[My][Mx] = 1;
+        Input.Cave[My][Mx].setState(1);
         this.Mx = x;
         this.My = y;
-        Input.Cave[this.My][this.Mx] = this.getId();
+        Input.Cave[this.My][this.Mx].setState(this.getId());
     }
 
     public boolean canSeePlayer(Player player){ //make proper ray-finding, look at brogue source, see if it can go java
@@ -90,13 +90,13 @@ public class Enemy {
         if (Ex == Px){ // if x the same
                 while (this.getYDif(player) < 0){//Ey > Py
                     Ey--;
-                    if (Input.Cave[Ey][Ex] == 0){
+                    if (Input.Cave[Ey][Ex].getState()==0){
                         return false;
                     }
                 }
                 while (Ey < Py){
                     Ey++;
-                    if (Input.Cave[Ey][Ex] == 0){
+                    if (Input.Cave[Ey][Ex].getState()==0){
                         return false;
                     }
                 }
@@ -107,13 +107,13 @@ public class Enemy {
         else if (Ey == Py){
             while (Ex > Px){
                 Ex--;
-                if (Input.Cave[Ey][Ex] == 0){
+                if (Input.Cave[Ey][Ex].getState()==0){
                     return false;
                 }
             }
             while (Ex < Px){
                 Ex++;
-                if (Input.Cave[Ey][Ex] == 0){
+                if (Input.Cave[Ey][Ex].getState()==0){
                     return false;
                 }
             }
@@ -126,7 +126,7 @@ public class Enemy {
             while (Ex != player.getX() && Ey != player.getY()) {
                 Ex += this.moveX(player);
                 Ey += this.moveY(player);
-                if (Input.Cave[Ey][Ex] == 0) {
+                if (Input.Cave[Ey][Ex].getState()==0) {
                     return false;
                 }
             }
@@ -206,7 +206,7 @@ public class Enemy {
         return player.getX()-this.getMx();
     }
     public void die(){
-        Input.Cave[this.getMy()][this.getMx()] = 1;
+        Input.Cave[this.getMy()][this.getMx()].setState(1);
         CaveFrame.enemyArrayList.remove(this);
         if (CaveFrame.enemyArrayList.size() < 1){
             System.out.println("You win!");

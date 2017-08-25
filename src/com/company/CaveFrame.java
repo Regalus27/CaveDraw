@@ -50,35 +50,35 @@ public class CaveFrame extends JFrame implements KeyListener{
     public void move(KeyEvent e){
 
         int kCode = e.getKeyCode();
-        if((kCode == 38||kCode==87||kCode==104) && Cave[y-1][x]!=0){//north
+        if((kCode == 38||kCode==87||kCode==104) && Cave[y-1][x].getState()!=0){//north
             dx=0;
             dy=-1;
         }
-        else if ((kCode==40||kCode==83||kCode==98) && Cave[y+1][x]!=0){//south
+        else if ((kCode==40||kCode==83||kCode==98) && Cave[y+1][x].getState()!=0){//south
             dx=0;
             dy=1;
         }
-        else if((kCode==37||kCode==65||kCode==100) && Cave[y][x-1]!=0){//west
+        else if((kCode==37||kCode==65||kCode==100) && Cave[y][x-1].getState()!=0){//west
             dx=-1;
             dy=0;
         }
-        else if((kCode==39||kCode==68||kCode==102) && Cave[y][x+1]!=0){//east
+        else if((kCode==39||kCode==68||kCode==102) && Cave[y][x+1].getState()!=0){//east
             dx=1;
             dy=0;
         }
-        else if (kCode==103 && Cave[y-1][x-1]!=0 && Cave[y][x-1]!=0 && Cave[y-1][x]!=0){//northwest
+        else if (kCode==103 && Cave[y-1][x-1].getState()!=0 && Cave[y][x-1].getState()!=0 && Cave[y-1][x].getState()!=0){//northwest
             dx=-1;
             dy=-1;
         }
-        else if (kCode==105 && Cave[y-1][x+1]!=0 && Cave[y][x+1]!=0 && Cave[y-1][x]!=0){//northeast
+        else if (kCode==105 && Cave[y-1][x+1].getState()!=0 && Cave[y][x+1].getState()!=0 && Cave[y-1][x].getState()!=0){//northeast
             dx=1;
             dy=-1;
         }
-        else if (kCode==97 && Cave[y+1][x-1]!=0 && Cave[y][x-1]!=0 && Cave[y+1][x]!=0){//southwest
+        else if (kCode==97 && Cave[y+1][x-1].getState()!=0 && Cave[y][x-1].getState()!=0 && Cave[y+1][x].getState()!=0){//southwest
             dx=-1;
             dy=1;
         }
-        else if (kCode==99 && Cave[y+1][x+1]!=0 && Cave[y][x+1]!=0 && Cave[y+1][x]!=0){//southeast
+        else if (kCode==99 && Cave[y+1][x+1].getState()!=0 && Cave[y][x+1].getState()!=0 && Cave[y+1][x].getState()!=0){//southeast
             dx=1;
             dy=1;
         }
@@ -87,7 +87,7 @@ public class CaveFrame extends JFrame implements KeyListener{
             dy = 0;
         }
 
-        if (Cave[y+dy][x+dx]<3) {
+        if (Cave[y+dy][x+dx].getState()<3) {
             x+=dx;
             y+=dy;
             player.move(dx, dy);
@@ -114,7 +114,7 @@ public class CaveFrame extends JFrame implements KeyListener{
         while (true){
             y=random.nextInt(maxY);
             x=random.nextInt(maxX);
-            if (Input.Cave[y][x] == 1){
+            if (Input.Cave[y][x].getState() == 1){
                 break;
             }
         }

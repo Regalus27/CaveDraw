@@ -31,7 +31,7 @@ public class Tile extends JComponent {
         else{
             yIndex = 0;
         }
-        int boolHold = Cave[yIndex][xIndex]; //multiplied by 20 for something else, so undoing it for reading file
+        int boolHold = Cave[yIndex][xIndex].getState(); //multiplied by 20 for something else, so undoing it for reading file
         if(boolHold == 0){
             full = 1;
         }
