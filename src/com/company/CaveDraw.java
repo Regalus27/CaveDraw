@@ -11,8 +11,8 @@ import static com.company.Input.w;
 public class CaveDraw extends JComponent {
     public void paintComponent(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        for(int y = 0; y < h; y++) {
-            for(int x = 0; x < w; x++) {
+        for(int y = 0; y < Automata.getWorld().length; y++) {
+            for(int x = 0; x < Automata.getWorld()[0].length; x++) {
                 Tile tile = new Tile(x, y);
                 tile.draw(g2);
             }

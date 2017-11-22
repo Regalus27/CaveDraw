@@ -16,7 +16,7 @@ import java.util.Random;
     static int h = 70, w = 70, fX = 0, fY = 0;
     static Node[][] Cave = new Node[h][w];
 
-     static void makeCave() {
+    static void makeCave() {
         Random rand = new Random();
         for (int i = 0; i < h; ++i){
             for (int j = 0; j < w; ++j){

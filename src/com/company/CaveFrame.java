@@ -10,6 +10,7 @@ import static com.company.Input.*;
 /**
  * JFrame frame for cave
  * Also is main class... :)
+ * except not anymore :(
  */
 public class CaveFrame extends JFrame implements KeyListener{
     static List<Enemy> enemyArrayList = new ArrayList<>(); //stores list of active enemies

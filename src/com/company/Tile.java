@@ -31,12 +31,12 @@ public class Tile extends JComponent {
         else{
             yIndex = 0;
         }
-        int boolHold = Cave[yIndex][xIndex].getState(); //multiplied by 20 for something else, so undoing it for reading file
-        if(boolHold == 0){
-            full = 1;
+        int boolHold = Automata.getWorld()[yIndex][xIndex].getState();//Cave[yIndex][xIndex].getState(); //multiplied by 20 for something else, so undoing it for reading file
+        if(boolHold == 1){
+            full = 1; //wall
         }
-        else if (boolHold == 1){
-            full = 0;
+        else if (boolHold == 0){
+            full = 0; //open
         }
         else{
             full = boolHold;
@@ -74,8 +74,6 @@ public class Tile extends JComponent {
         }
         Rectangle tile = new Rectangle(xTiles[xIndex], yTiles[yIndex], 10, 10);
         g2.fill(tile);
-        Rectangle topLeft = new Rectangle(0,0,10,10);
-        g2.setColor(Color.black);
-        g2.fill(topLeft);
+
     }
 }
