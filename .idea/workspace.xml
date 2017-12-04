@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a9076afa-7517-45e4-94d2-8c94a04001cc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CaveDraw/com/company/Automata.class" afterPath="$PROJECT_DIR$/out/production/CaveDraw/com/company/Automata.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CaveDraw/com/company/Input.class" afterPath="$PROJECT_DIR$/out/production/CaveDraw/com/company/Input.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Automata.java" afterPath="$PROJECT_DIR$/src/com/company/Automata.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/AutomataViewer.java" afterPath="$PROJECT_DIR$/src/com/company/AutomataViewer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Cavern.java" afterPath="$PROJECT_DIR$/src/com/company/Cavern.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Input.java" afterPath="$PROJECT_DIR$/src/com/company/Input.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Miner.java" afterPath="$PROJECT_DIR$/src/com/company/Miner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Node.java" afterPath="$PROJECT_DIR$/src/com/company/Node.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Tile.java" afterPath="$PROJECT_DIR$/src/com/company/Tile.java" />
-    </list>
+    <list default="true" id="a9076afa-7517-45e4-94d2-8c94a04001cc" name="Default" comment="" />
     <ignored path="CaveDraw.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
