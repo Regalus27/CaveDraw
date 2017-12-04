@@ -16,25 +16,31 @@ public class AutomataViewer extends JFrame{
 
     AutomataViewer(){
         Automata.makeCave();
-        setSize((Automata.getWorld()[0].length)*11, (Automata.getWorld().length)*11);
+        setSize(Automata.getWidth()*10, Automata.getHeight()*10);
         setTitle("Cave");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //draw in cave
         CaveDraw cave = new CaveDraw();
         add(cave);
-        printCaverns();
+        Miner miner = new Miner();
+        miner.connectCaverns();
+        //printCaverns();
     }
     static void printCaverns () {
         //for testing
         for (Node[] nodes: Automata.getWorld()){
             for (Node n : nodes){
-                if (n.getCavern() == -1){
+                /*if (n.getCavern() == -1){
                     System.out.print(". ");
                 } else {
                     System.out.print(n.getCavern() + " ");
-                }
+                }*/
+                System.out.print(n.getSpecPrint() + " ");
             }
             System.out.println();
         }
+    }
+    static void resetCavernID(){
+        cavernID = 0;
     }
 }

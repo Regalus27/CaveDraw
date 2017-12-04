@@ -3,35 +3,31 @@ package com.company;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.company.Input.Cave;
-import static com.company.Input.h;
-import static com.company.Input.w;
-
 /**
  * Tile class
  */
 public class Tile extends JComponent {
     private int xIndex = 0, yIndex = 0;
-    private int full = 1;
+    private int full = 1; //wall
     public Tile(int x, int y){
         /*
         true is black, false is lightGray. occupied is blue
         xRange should be 0 - (w-1), same y
 
         */
-        if(x > -1 && x < w){
+        if(x > -1 && x < Automata.getWidth()){
             xIndex = x;
         }
         else{
             xIndex = 0;
         }
-        if(y > -1 && y < h){
+        if(y > -1 && y < Automata.getHeight()){
             yIndex = y;
         }
         else{
             yIndex = 0;
         }
-        int boolHold = Automata.getWorld()[yIndex][xIndex].getState();//Cave[yIndex][xIndex].getState(); //multiplied by 20 for something else, so undoing it for reading file
+        int boolHold = Automata.getNode(yIndex,xIndex).getState();//Cave[yIndex][xIndex].getState(); //multiplied by 20 for something else, so undoing it for reading file
         if(boolHold == 1){
             full = 1; //wall
         }
@@ -65,14 +61,8 @@ public class Tile extends JComponent {
         else if (full == 6){
             g2.setColor(Color.red);
         }
-        //Tiles
-        int[] xTiles = new int[w+1];
-        int[] yTiles = new int[h+1];
-        for(int i = 0; i < w+1; i++){
-                xTiles[i] = i * 10;
-                yTiles[i] = i * 10;
-        }
-        Rectangle tile = new Rectangle(xTiles[xIndex], yTiles[yIndex], 10, 10);
+
+        Rectangle tile = new Rectangle(this.xIndex*10, this.yIndex*10, 10, 10);
         g2.fill(tile);
 
     }

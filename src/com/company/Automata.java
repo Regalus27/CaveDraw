@@ -3,6 +3,8 @@ package com.company;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static com.company.AutomataViewer.resetCavernID;
+
 /**
  * Processes input to make it smoother
  * and makes a cave now
@@ -10,22 +12,36 @@ import java.util.Random;
  */
 public class Automata {
 
-    private static final int TARGETL = 5, TARGETH = 9, SPAWNPROB = 48;
+    private static final int TARGETL = 5, TARGETH = 9, SPAWNPROB = 48, CYCLE_TIMES = 8, WIDTH = 130, HEIGHT = 70;
     private static Node[][] world, temp;
     private static ArrayList<Cavern> caverns;
 
     static void makeCave(){
-        initializeWorld();
-        cycle(5);
+        initializeWorld(HEIGHT, WIDTH);
+        cycle(CYCLE_TIMES);
         findCaverns();
+    }
+
+    public static int getWidth(){
+        return WIDTH;
+    }
+    public static int getHeight(){
+        return HEIGHT;
     }
 
     static ArrayList<Cavern> getCaverns(){
         return caverns;
     }
 
-    static void findCaverns(){
+    public static void findCaverns(){
         caverns = new ArrayList<>();
+        for(Node[] nodes: getWorld()){
+            for (Node n: nodes) {
+                n.setCavern(-1);
+            }
+        }
+        caverns.clear();
+        resetCavernID();
         for(Node[] nodes: getWorld()){
             for (Node n: nodes){
                 if (n.getState()==0 && n.getCavern() == -1) {
@@ -49,7 +65,7 @@ public class Automata {
         }
     }
 
-    public static Node[][] getWorld(){
+    static Node[][] getWorld(){
         return world;
     }
 
@@ -59,10 +75,10 @@ public class Automata {
         }
     }
 
-    static void cycle(){ //automata run through
+    private static void cycle(){ //automata run through
         world = getWorld();
         temp = world;
-        int neighbors = 0;
+        int neighbors;
         for (int h = 0; h < world.length; h++) {
             for (int w = 0; w < world[0].length; w++) {
                 neighbors = getOpenNeighbors(h, w);
@@ -82,7 +98,7 @@ public class Automata {
         int n =getWorld()[h][w].getOpenNeighbors().size();
         return n;
     }
-    public static void initializeWorld(int height, int width){
+    private static void initializeWorld(int height, int width){
         Random rand = new Random();
         Node[][] newWorld = new Node[height][width]; //all zeroes, empty
         for (int y = 0; y < height; y++){
@@ -100,6 +116,8 @@ public class Automata {
 
     public static void initializeWorld(){
         //default size 40x40 at start
-        initializeWorld(60, 60);
+        initializeWorld(40, 40);
     }
+
+    public static Node getNode(int y, int x) { return Automata.getWorld()[y][x]; }
 }

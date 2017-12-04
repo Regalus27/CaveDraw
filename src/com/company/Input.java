@@ -53,9 +53,8 @@ import java.util.Random;
         }
         fX = curX;
         fY = curY;
-        for (int i = 0; i < 3; i++){
-            Automata.cycle();
-        }
+        Automata.cycle(3);
+
         /*for(int y = 0; y < h; y++){
             for (int x = 0; x < w; x++){
                 System.out.print(Cave[y][x]);

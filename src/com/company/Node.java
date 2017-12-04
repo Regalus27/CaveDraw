@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 public class Node {
     private int x, y, state, cavern;
+    private String specPrint;
     public Node (int X, int Y, int State){
         this.x = X;
         this.y = Y;
         this.state = State;
         this.cavern = -1;
+        this.specPrint = "#";
     }
     public int getX(){
         return this.x;
@@ -16,14 +18,24 @@ public class Node {
     public int getY(){
         return this.y;
     }
+    public double getDistance(Node n){
+        return Math.sqrt(Math.pow(n.getX()-this.getX(),2) + Math.pow(n.getY()-this.getY(),2));
+    }
     public int getCavern(){
         return this.cavern;
     }
     public void setCavern(int cavernID){
+        this.specPrint = String.valueOf(cavernID);
         this.cavern = cavernID;
     }
     public int getState(){
         return this.state;
+    }
+    public String getSpecPrint(){
+        return this.specPrint;
+    }
+    public void setSpecPrint(String str){
+        this.specPrint = str;
     }
     public void setState(int newState){
         this.state = newState;
