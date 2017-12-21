@@ -16,7 +16,7 @@ public class AutomataViewer extends JFrame{
 
     AutomataViewer(){
         Automata.makeCave();
-        setSize(Automata.getWidth()*10, Automata.getHeight()*10);
+        setSize((int) (Automata.getWidth()*10) + 15, (int) (Automata.getHeight()*10) + 39);
         setTitle("Cave");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //draw in cave

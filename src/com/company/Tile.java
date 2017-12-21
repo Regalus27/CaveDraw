@@ -27,7 +27,7 @@ public class Tile extends JComponent {
         else{
             yIndex = 0;
         }
-        int boolHold = Automata.getNode(yIndex,xIndex).getState();//Cave[yIndex][xIndex].getState(); //multiplied by 20 for something else, so undoing it for reading file
+        int boolHold = Automata.getNode(yIndex,xIndex).getState();
         if(boolHold == 1){
             full = 1; //wall
         }

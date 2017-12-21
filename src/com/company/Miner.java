@@ -4,27 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Miner {
-    Random rand = new Random();
     /*
-    * Each sector gets
-    * Entrance(s)
-    * Puzzle
-    * Twist
-    * Climax
-    * Reward
-    * -->
-    * Entrance
-    *   Guards
-    * Special Faction Specific Rooms
-    *   Library
-    *   Armory
-    *   Etc
-    * Boss Fight
-    *   Good Terrain Features
-    *
-    * But first....
-    * make entrances
+    * Connects caverns
     * */
+    Random rand = new Random();
     public void makeEntrances(){
 
     }
@@ -83,5 +66,17 @@ public class Miner {
             }
             Automata.getNode(y,x).setState(0);
         }
+    }
+    public void mineRooms(){
+        for (Cavern c: Automata.getCaverns()){
+            if (makeRoom(c.getEdges().get(rand.nextInt(c.getEdges().size())))){
+                //room made
+            }
+        }
+    }
+    private boolean makeRoom(Node node){ //true if success, false if unable to
+
+
+        return false;
     }
 }

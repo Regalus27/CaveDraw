@@ -3,6 +3,12 @@ package com.company;
 import java.util.ArrayList;
 
 public class Node {
+    public enum Direction{
+        NORTH,
+        EAST,
+        SOUTH,
+        WEST
+    }
     private int x, y, state, cavern;
     private String specPrint;
     public Node (int X, int Y, int State){
@@ -61,5 +67,19 @@ public class Node {
             }
         }
         return openNodes;
+    }
+    public int getDistToEdge(Direction d){
+        switch (d){
+            case EAST:
+                return Automata.getWidth()-this.getX();
+            case WEST:
+                return this.getX();
+            case NORTH:
+                return this.getY();
+            case SOUTH:
+                return Automata.getHeight()-this.getY();
+            default:
+                return 0;
+        }
     }
 }
