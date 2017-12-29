@@ -66,6 +66,19 @@ public class Miner {
             }
             Automata.getNode(y,x).setState(0);
         }
+        //Testing
+        //Random walk, weighted
+        int slope, direction = 5;
+        // 1 2 3
+        // 4 5 6
+        // 7 8 9
+        while(x!=xf&&y!=yf) {
+            if (xf - x != 0) {
+                slope = (yf - y)/(xf - x);
+            } else {
+                direction = (yf - y > 0) ? 2 : 8;
+            }
+        }
     }
     public void mineRooms(){
         for (Cavern c: Automata.getCaverns()){
