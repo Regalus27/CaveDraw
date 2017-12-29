@@ -12,7 +12,7 @@ import static com.company.AutomataViewer.resetCavernID;
  */
 public class Automata {
 
-    private static final int TARGETL = 5, TARGETH = 9, SPAWNPROB = 48, CYCLE_TIMES = 10, WIDTH = 100, HEIGHT = 70;
+    private static final int TARGETL = 5, TARGETH = 9, SPAWNPROB = 48, CYCLE_TIMES = 10, WIDTH = 60, HEIGHT = 60;
     private static Node[][] world, temp;
     private static ArrayList<Cavern> caverns;
 
@@ -116,7 +116,7 @@ public class Automata {
 
     public static void initializeWorld(){
         //default size 40x40 at start
-        initializeWorld(70, 70);
+        initializeWorld(30, 30);
     }
 
     public static Node getNode(int y, int x) { return Automata.getWorld()[y][x]; }

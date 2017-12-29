@@ -31,8 +31,8 @@ public class Node {
         return this.cavern;
     }
     public void setCavern(int cavernID){
-        this.specPrint = String.valueOf(cavernID);
         this.cavern = cavernID;
+        this.setSpecPrint((this.getCavern()<0)  ? "." : "#");
     }
     public int getState(){
         return this.state;
