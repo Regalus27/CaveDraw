@@ -82,4 +82,11 @@ public class Node {
                 return 0;
         }
     }
+    public boolean getOpen(){
+        if (this.getState()==0){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
