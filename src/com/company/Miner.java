@@ -41,7 +41,10 @@ public class Miner {
             for (Cavern c : caverns) {
                 sNode = c.getConnectionNode(c.getNearestCavern());
                 fNode = c.getNearestCavern().getConnectionNode(c);
+
                 makeTunnel(sNode, fNode);
+
+                c.addConnectedCavern(fNode.getCavern());
             }
         }
     }

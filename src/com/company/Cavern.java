@@ -9,11 +9,27 @@ import java.util.ArrayList;
 public class Cavern {
     //main thing a Node[], just a list of the nodes in the cave.
     private ArrayList<Node> cavern;
+    private ArrayList<Integer> directCavernsID;
     private int cavernID;
     Cavern(){
         this.cavernID = AutomataViewer.cavernID++;
         cavern = new ArrayList<>();
+        directCavernsID = new ArrayList<>();
     }
+
+    public void addConnectedCavern(int cavernID){
+        this.directCavernsID.add(cavernID);
+    }
+    public boolean connectedTo(int cavernID){
+        //if this cavern initiated a connection to other cavern
+        for(int c:this.directCavernsID){
+            if(cavernID == c){
+                return true;
+            }
+        }
+        return false;
+    }
+
     ArrayList<Node> getEdges(){
         //find the edges of the cavern
         //could be on the inside as well, around a pillar or something.

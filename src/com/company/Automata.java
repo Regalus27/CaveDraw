@@ -12,7 +12,7 @@ import static com.company.AutomataViewer.resetCavernID;
  */
 public class Automata {
 
-    private static final int TARGETL = 5, TARGETH = 9, SPAWNPROB = 50, CYCLE_TIMES = 10, WIDTH = 60, HEIGHT = 60;
+    private static final int TARGETL = 5, TARGETH = 9, SPAWNPROB = 50, CYCLE_TIMES = 3, WIDTH = 80, HEIGHT = 60;
     private static Node[][] world, temp;
     private static ArrayList<Cavern> caverns;
 

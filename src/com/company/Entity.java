@@ -31,7 +31,7 @@ public class Entity {
 
     public Position moveRelative(int dy, int dx){
         //try to move in a direction, stop where blocked.
-
+        return null;
     }
 
 

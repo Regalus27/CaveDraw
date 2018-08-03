@@ -1,9 +1,6 @@
 package com.company;
 
 import javax.swing.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.*;
 
 public class AutomataViewer extends JFrame{
     static AutomataViewer frame = new AutomataViewer();
@@ -19,12 +16,8 @@ public class AutomataViewer extends JFrame{
         setSize((int) (Automata.getWidth()*10) + 15, (int) (Automata.getHeight()*10) + 39);
         setTitle("Cave");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //draw in cave
-        CaveDraw cave = new CaveDraw();
-        add(cave);
         Miner miner = new Miner();
         miner.connectCaverns();
-        //printCaverns();
     }
     static void printCaverns () {
         //for testing
